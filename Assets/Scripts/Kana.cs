@@ -7,6 +7,9 @@ public class Kana : MonoBehaviour
 {
 	KanaFactory originFactory;
 
+    [SerializeField] GameObject TextPrefab;
+
+
 	//List of valid kanas
 	string[] kanas = new string[]
 	{
@@ -19,6 +22,9 @@ public class Kana : MonoBehaviour
 
 	public string kana_text;
 
+	private Vector3 textOffset = new Vector3(0, 0.25f, -0.1f);
+
+
 
     public KanaFactory OriginFactory
 	{
@@ -30,12 +36,24 @@ public class Kana : MonoBehaviour
 		}
 	}
 
+	//Called on initalize inside of KanaFactory.cs
+	public void Init()
+    {
+		GenerateKanaText();
+    }
 
-	void GenerateKanaText()
+
+
+
+
+    public void GenerateKanaText()
     {
 		kana_text = kanas[Random.Range(0, kanas.Length)];
-
-		//Generate text mesh
+		GameObject newText = Instantiate(TextPrefab);
+		newText.transform.SetParent(gameObject.transform);
+		newText.transform.position = this.transform.position + textOffset;
+		TMPro.TextMeshPro textMeshPro = newText.GetComponent<TMPro.TextMeshPro>();
+		textMeshPro.text = kana_text;
 
 
 

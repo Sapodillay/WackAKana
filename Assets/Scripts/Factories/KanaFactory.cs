@@ -17,6 +17,7 @@ public class KanaFactory : ScriptableObject
     {
         Kana instance = Instantiate(kanaPrefab);
         instance.OriginFactory = this;
+        instance.Init();
         MoveToFactoryScene(instance.gameObject);
         return instance;
     }
