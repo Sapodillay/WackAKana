@@ -16,10 +16,18 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             Submit();
+            return;
         }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            currentText = currentText.Remove(currentText.Length - 1);
+        }
+
+
+
         if(currentText.Length > charLimit)
         {
             return;
