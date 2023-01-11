@@ -81,7 +81,7 @@ public class KanaManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            SpawnNewKana();
+            //SpawnNewKana();
         }
 
 
