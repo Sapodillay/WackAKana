@@ -723,6 +723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1450994907}
   currentText: 
+  charLimit: 4
 --- !u!4 &1447589125
 Transform:
   m_ObjectHideFlags: 0
