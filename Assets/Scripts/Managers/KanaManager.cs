@@ -8,7 +8,6 @@ public class KanaManager : MonoBehaviour
     [SerializeField]
     KanaFactory factory;
 
-    List<Kana> kanaList = new List<Kana>();
     [SerializeField]
     Spawn[] spawns;
 
@@ -17,7 +16,7 @@ public class KanaManager : MonoBehaviour
     [SerializeField]
     List<Spawn> occupiedSpawns = new List<Spawn>();
 
-
+    List<Kana> kanaList = new List<Kana>();
 
 
 
@@ -83,6 +82,18 @@ public class KanaManager : MonoBehaviour
     public void Submit(string submitText)
     {
 
+        foreach(Kana kana in kanaList)
+        {
+            if (submitText.Equals(kana.Text, System.StringComparison.OrdinalIgnoreCase))
+            {
+                //Handle success code
+                kanaList.Remove(kana);
+                kana.Recycle();
+                return;
+            }
+
+        }
+
     }
 
 
@@ -90,9 +101,9 @@ public class KanaManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F1))
         {
-            //SpawnNewKana();
+            SpawnNewKana();
         }
 
 

@@ -9,6 +9,10 @@ public class Kana : MonoBehaviour
 
     [SerializeField] GameObject TextPrefab;
 
+	string _text;
+	public string Text
+	{ get { return _text; } }
+
 
 	//List of valid kanas
 	//TODO: Add all Kanas
@@ -21,7 +25,6 @@ public class Kana : MonoBehaviour
 		"KU"
 	};
 
-	public string kana_text;
 
 	private Vector3 textOffset = new Vector3(0, 0.25f, -0.1f);
 
@@ -54,12 +57,13 @@ public class Kana : MonoBehaviour
 	/// </summary>
     public void GenerateKanaText()
     {
-		kana_text = kanas[Random.Range(0, kanas.Length)];
+		string kana_text = kanas[Random.Range(0, kanas.Length)];
 		GameObject newText = Instantiate(TextPrefab);
 		newText.transform.SetParent(gameObject.transform);
 		newText.transform.position = this.transform.position + textOffset;
 		TMPro.TextMeshPro textMeshPro = newText.GetComponent<TMPro.TextMeshPro>();
-		textMeshPro.text = kana_text;
+        _text = kana_text;
+        textMeshPro.text = kana_text;
 	}
 
 

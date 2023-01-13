@@ -49,9 +49,10 @@ public class InputHandler : MonoBehaviour
     /// </summary>
     private void Submit()
     {
-        kanaManager.Submit(currentText);
+        string tmpText = currentText;
         currentText = "";
         text.text = "";
+        kanaManager.Submit(tmpText);
     }
 
 
