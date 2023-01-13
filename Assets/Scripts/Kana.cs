@@ -11,6 +11,7 @@ public class Kana : MonoBehaviour
 
 
 	//List of valid kanas
+	//TODO: Add all Kanas
 	string[] kanas = new string[]
 	{
 		"KA",
@@ -25,7 +26,6 @@ public class Kana : MonoBehaviour
 	private Vector3 textOffset = new Vector3(0, 0.25f, -0.1f);
 
 
-
     public KanaFactory OriginFactory
 	{
 		get => originFactory;
@@ -36,7 +36,9 @@ public class Kana : MonoBehaviour
 		}
 	}
 
-	//Called on initalize inside of KanaFactory.cs
+	/// <summary>
+	/// Initalization code that is created at the start of GameObject lifetime inside of the KanaFactory.cs
+	/// </summary>
 	public void Init()
     {
 		GenerateKanaText();
@@ -45,7 +47,11 @@ public class Kana : MonoBehaviour
 
 
 
-
+	/// <summary>
+	/// Gets a random string from string[] kanas
+	/// Initalizes a new text gameObject and sets the parent to the Kana GameObject
+	/// also sets the transformation so that it is infront of the Kana Mesh and sets the text to the random text from string[] kanas.
+	/// </summary>
     public void GenerateKanaText()
     {
 		kana_text = kanas[Random.Range(0, kanas.Length)];
@@ -54,14 +60,13 @@ public class Kana : MonoBehaviour
 		newText.transform.position = this.transform.position + textOffset;
 		TMPro.TextMeshPro textMeshPro = newText.GetComponent<TMPro.TextMeshPro>();
 		textMeshPro.text = kana_text;
-
-
-
 	}
 
 
-	//Recycle object, currently just deletes it
-	public void Recycle()
+    /// <summary>
+    /// Recycle object, currently just deletes it
+    /// </summary>
+    public void Recycle()
     {
 		originFactory.Reclaim(this);
     }

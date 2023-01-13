@@ -31,13 +31,14 @@ public class KanaManager : MonoBehaviour
         }
 
 
-
-
-
     }
 
 
-
+    /// <summary>
+    /// Gets a random Spawn that isn't occupied
+    /// Moves the spawn from the freeSpawns array to the occupy spawn array
+    /// </summary>
+    /// <returns></returns>
     Spawn getRandomFreeSpawn()
     {
         if(freeSpawns.Count == 0)
@@ -57,7 +58,9 @@ public class KanaManager : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// Spawn new Kana in a free spawn
+    /// </summary>
     void SpawnNewKana()
     {
         //Get random free spawn
@@ -73,6 +76,14 @@ public class KanaManager : MonoBehaviour
         kanaList.Add(k);
     }
 
+    /// <summary>
+    /// Called from InputHandler.cs with the current text the user has submitted.
+    /// </summary>
+    /// <param name="submitText">Text submitted from InputHandler</param>
+    public void Submit(string submitText)
+    {
+
+    }
 
 
 

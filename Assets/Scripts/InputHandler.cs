@@ -14,38 +14,44 @@ public class InputHandler : MonoBehaviour
     [SerializeField]
     public int charLimit;
 
+    [SerializeField]
+    public KanaManager kanaManager;
+
     private void Update()
     {
+        //Submit the text to the KanaManager.cs Submit() function
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Submit();
             return;
         }
+        //Handle removing text
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             currentText = currentText.Remove(currentText.Length - 1);
         }
 
 
-
+        //Check that the text isn't over the character limit
         if(currentText.Length > charLimit)
         {
             return;
         }
+        //Only add alpha characters
         currentText += Regex.Replace(Input.inputString, "[^A-Za-z -]", "");
+        //Add text to the display
         text.text = currentText;
     }
 
 
-    //Handle submit
-    //currently just empties string
+    /// <summary>
+    /// Empties the string and calls the KanaManager.cs Submit function with the text
+    /// </summary>
     private void Submit()
     {
+        kanaManager.Submit(currentText);
         currentText = "";
         text.text = "";
-
-
-
     }
 
 
