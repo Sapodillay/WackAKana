@@ -142,8 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded08d82168405145be45dfb5464f6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextPrefab: {fileID: 1553776532080751852, guid: 13a1c42d31fbf594fb0ff30f33586ab8, type: 3}
-  kana_text: 
+  kanaImagePrefab: {fileID: 922487946445941260, guid: 805ff2173dfd8fa46b517aa2da1f97d2, type: 3}
 --- !u!1 &4467396007343548452
 GameObject:
   m_ObjectHideFlags: 0

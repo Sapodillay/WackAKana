@@ -1,13 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 
 public class Kana : MonoBehaviour
 {
 	KanaFactory originFactory;
 
-    [SerializeField] GameObject TextPrefab;
+    [SerializeField] GameObject kanaImagePrefab;
 
 	string _text;
 	public string Text
@@ -16,14 +17,12 @@ public class Kana : MonoBehaviour
 
 	//List of valid kanas
 	//TODO: Add all Kanas
-	string[] kanas = new string[]
-	{
-		"KA",
-		"KE",
-		"KO",
-		"KI",
-		"KU"
-	};
+	[SerializeField] Dictionary<string, Sprite> kanas = new Dictionary<string, Sprite>();
+
+
+
+
+
 
 
 	private Vector3 textOffset = new Vector3(0, 0.25f, -0.1f);
@@ -44,26 +43,30 @@ public class Kana : MonoBehaviour
 	/// </summary>
 	public void Init()
     {
-		GenerateKanaText();
+        CompileTextImage();
     }
 
 
 
-
 	/// <summary>
-	/// Gets a random string from string[] kanas
-	/// Initalizes a new text gameObject and sets the parent to the Kana GameObject
-	/// also sets the transformation so that it is infront of the Kana Mesh and sets the text to the random text from string[] kanas.
+	/// Generates a random kana from string[] kana_text and adds a image sprite from "Sprites/" kana_text[i] ".png"
 	/// </summary>
-    public void GenerateKanaText()
+    public void CompileTextImage()
     {
-		string kana_text = kanas[Random.Range(0, kanas.Length)];
-		GameObject newText = Instantiate(TextPrefab);
-		newText.transform.SetParent(gameObject.transform);
-		newText.transform.position = this.transform.position + textOffset;
-		TMPro.TextMeshPro textMeshPro = newText.GetComponent<TMPro.TextMeshPro>();
+		//Random kana
+
+		int index = Random.Range(0, kanas.Count);
+
+		string kana_text = kanas.ElementAt(index).Key;
+		Sprite kana_sprite = kanas.ElementAt(index).Value;
+
+		//Instantiate image and set it's parent to the kana and position it infront of the kana
+		GameObject kanaImage = Instantiate(kanaImagePrefab);
+		kanaImage.transform.SetParent(gameObject.transform);
+		kanaImage.transform.position = this.transform.position + textOffset;
+		kanaImage.transform.localScale = Vector3.one / 2.2f;
+
         _text = kana_text;
-        textMeshPro.text = kana_text;
 	}
 
 

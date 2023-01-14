@@ -724,6 +724,7 @@ MonoBehaviour:
   text: {fileID: 1450994907}
   currentText: 
   charLimit: 4
+  kanaManager: {fileID: 368377460}
 --- !u!4 &1447589125
 Transform:
   m_ObjectHideFlags: 0
