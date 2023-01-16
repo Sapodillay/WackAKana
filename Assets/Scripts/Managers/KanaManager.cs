@@ -71,7 +71,9 @@ public class KanaManager : MonoBehaviour
         }
         //Get new kana
         Kana k = factory.Get();
-        k.transform.position = spawn.spawnPoint.position;
+
+        //Set kana object to the spawn point and add vector to make kana visible
+        k.transform.position = spawn.spawnPoint.position + Vector3.up;
         kanaList.Add(k);
     }
 
