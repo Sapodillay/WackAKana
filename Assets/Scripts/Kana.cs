@@ -21,64 +21,64 @@ class KanaData : ScriptableObject
 	public static string[] vowelKanas = new string[]
 	{
 		"あ:A",
-		"え:E",
 		"い:I",
-		"お:O",
 		"う:U",
+		"え:E",
+		"お:O",
 	};
 
     public static string[] KKanas = new string[]
 	{
         "か:KA",
-        "け:KE",
         "き:KI",
-        "こ:KO",
         "く:KU",
+        "け:KE",
+        "こ:KO",
 	};
 
     public static string[] SKanas = new string[]
 	{
         "さ:SA",
-        "せ:SE",
         "し:SHI",
-        "そ:SO",
         "す:SU",
+        "せ:SE",
+        "そ:SO",
 	};
 
     public static string[] TKanas = new string[]
 	{
         "た:TA",
-        "て:TE",
         "ち:CHI",
+        "つ:TSU",
+        "て:TE",
         "と:TO",
-        "つ:TU",
 	};
 
     public static string[] NKanas = new string[]
 	{
         "な:NA",
-        "ね:NE",
         "に:NI",
-        "の:NO",
         "ぬ:NU",
+        "ね:NE",
+        "の:NO",
 	};
 
     public static string[] HKanas = new string[]
 	{
         "は:HA",
-        "へ:HE",
         "ひ:HI",
-        "ほ:HO",
         "ふ:FU",
+        "へ:HE",
+        "ほ:HO",
 	};
 
     public static string[] MKanas = new string[]
 	{
         "ま:MA",
-        "め:ME",
         "み:MI",
-        "も:MO",
         "む:MU",
+        "め:ME",
+        "も:MO",
 	};
 
     public static string[] YKanas = new string[]
@@ -90,11 +90,11 @@ class KanaData : ScriptableObject
 
     public static string[] RKanas = new string[]
     {
-        "ら:A",
-        "れ:E",
-        "り:I",
-        "ろ:O",
-        "る:U",
+        "ら:RA",
+        "り:RI",
+        "る:RU",
+        "れ:RE",
+        "ろ:RO",
     };
 
     public static string[] EXTRAKanas = new string[]
@@ -103,12 +103,6 @@ class KanaData : ScriptableObject
         "を:WO",
         "ん:N",
     };
-
-
-
-
-
-
 
     public static string[] kanas = new string[] {
         "あ:A",
@@ -177,9 +171,9 @@ public class Kana : MonoBehaviour
 	public string Text
 	{ get { return _text; } }
 
-
-	//List of valid kanas
-	//TODO: Add all Kanas
+    public Spawn Spawn
+    { get { return _spawnPoint; } }
+    Spawn _spawnPoint;
 
 
 	[SerializeField] TMPro.TextMeshPro textMesh;
@@ -198,8 +192,9 @@ public class Kana : MonoBehaviour
 	/// <summary>
 	/// Initalization code that is created at the start of GameObject lifetime inside of the KanaFactory.cs
 	/// </summary>
-	public void Init()
+	public void Init(Spawn spawn)
     {
+        _spawnPoint = spawn;
         SetKanaText();
     }
 

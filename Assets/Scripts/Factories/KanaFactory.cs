@@ -17,11 +17,11 @@ public class KanaFactory : ScriptableObject
     /// Gets a default Kana object and initalizes it.
     /// </summary>
     /// <returns></returns>
-    Kana GetKana()
+    Kana GetKana(Spawn spawn)
     {
         Kana instance = Instantiate(kanaPrefab);
         instance.OriginFactory = this;
-        instance.Init();
+        instance.Init(spawn);
         MoveToFactoryScene(instance.gameObject);
         return instance;
     }
@@ -32,9 +32,9 @@ public class KanaFactory : ScriptableObject
     /// TODO: Add support for more Kana types to easily change difficulties and slowly introduce new kana
     /// </summary>
     /// <returns></returns>
-    public Kana Get()
+    public Kana Get(Spawn spawn)
     {
-        return GetKana();
+        return GetKana(spawn);
     }
 
 

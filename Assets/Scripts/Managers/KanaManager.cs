@@ -54,13 +54,17 @@ public class KanaManager : MonoBehaviour
         return freeSpawn;
     }
 
-
+    private void freeSpawn(Spawn spawn)
+    {
+        occupiedSpawns.Remove(spawn);
+        freeSpawns.Add(spawn);
+    }
 
 
     /// <summary>
     /// Spawn new Kana in a free spawn
     /// </summary>
-    void SpawnNewKana()
+    public void SpawnNewKana()
     {
         //Get random free spawn
         Spawn spawn = getRandomFreeSpawn();
@@ -70,7 +74,7 @@ public class KanaManager : MonoBehaviour
             return;
         }
         //Get new kana
-        Kana k = factory.Get();
+        Kana k = factory.Get(spawn);
 
         //Set kana object to the spawn point and add vector to make kana visible
         k.transform.position = spawn.spawnPoint.position + Vector3.up;
@@ -90,6 +94,7 @@ public class KanaManager : MonoBehaviour
             {
                 //Handle success code
                 kanaList.Remove(kana);
+                freeSpawn(kana.Spawn);
                 kana.Recycle();
                 return;
             }
