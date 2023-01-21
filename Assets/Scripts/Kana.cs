@@ -176,8 +176,21 @@ public class Kana : MonoBehaviour
     Spawn _spawnPoint;
 
 
+    [SerializeField] KanaManager kanaManager;
+
+    [SerializeField] Renderer signRenderer;
+    /// <summary>
+    /// Material that displays the current decay of the Kana
+    /// </summary>
+    [SerializeField] Material progressMaterial;
+    /// <summary>
+    /// Amount of time in seconds for the object to decay and negate points to the player
+    /// </summary>
+    [SerializeField] float decay = 2;
 	[SerializeField] TMPro.TextMeshPro textMesh;
 
+    //Time at initalization
+    float initTime;
 
     public KanaFactory OriginFactory
 	{
@@ -189,20 +202,48 @@ public class Kana : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// Initalization code that is created at the start of GameObject lifetime inside of the KanaFactory.cs
-	/// </summary>
-	public void Init(Spawn spawn)
+    void MaterialSetup()
     {
-        _spawnPoint = spawn;
-        SetKanaText();
+        Material material = Instantiate(progressMaterial);
+        signRenderer.material = material;
+        progressMaterial = material;
+        progressMaterial.SetFloat("_Radius", 0f);
+
     }
 
 
+    /// <summary>
+    /// Initalization code that is created at the start of GameObject lifetime inside of the KanaFactory.cs
+    /// </summary>
+    public void Init(Spawn spawn)
+    {
+        //Set init time to the current game time.
+        initTime = Time.time;
+        _spawnPoint = spawn;
+        MaterialSetup();
+        SetKanaText();
+        kanaManager = FindObjectOfType<KanaManager>();
+    }
 
-	/// <summary>
-	/// Generates a random kanas from string[] kanas and sets it as the textMeshPro text;
-	/// </summary>
+
+    private void Update()
+    {
+        //Returns true after decay time of the object spawning
+        if (-(initTime - Time.time) > decay)
+        {
+            //Destroy
+            progressMaterial.SetFloat("_Radius", 0.58f);
+            Recycle();
+        }
+        //Get the current progress, 0.58f is 100% progress for the progressMaterial
+        float progress = Mathf.Lerp(0, 0.58f, -(initTime - Time.time) / decay);
+        progressMaterial.SetFloat("_Radius", progress);
+    }
+
+
+    /// <summary>
+    /// Generates a random kanas from string[] kanas and sets it as the textMeshPro text;
+    /// </summary>
     public void SetKanaText()
     {
 		//Random kanaRomaji
@@ -221,6 +262,7 @@ public class Kana : MonoBehaviour
     /// </summary>
     public void Recycle()
     {
+        kanaManager.recycleKana(this);
 		originFactory.Reclaim(this);
     }
 

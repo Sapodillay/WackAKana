@@ -54,7 +54,7 @@ public class KanaManager : MonoBehaviour
         return freeSpawn;
     }
 
-    private void freeSpawn(Spawn spawn)
+    public void freeSpawn(Spawn spawn)
     {
         occupiedSpawns.Remove(spawn);
         freeSpawns.Add(spawn);
@@ -93,8 +93,6 @@ public class KanaManager : MonoBehaviour
             if (submitText.Equals(kana.Text, System.StringComparison.OrdinalIgnoreCase))
             {
                 //Handle success code
-                kanaList.Remove(kana);
-                freeSpawn(kana.Spawn);
                 kana.Recycle();
                 return;
             }
@@ -116,8 +114,10 @@ public class KanaManager : MonoBehaviour
 
     }
 
-
-
-
-
+    internal void recycleKana(Kana kana)
+    {
+        kanaList.Remove(kana);
+        freeSpawn(kana.Spawn);
+        kanaList.Add(kana);
+    }
 }

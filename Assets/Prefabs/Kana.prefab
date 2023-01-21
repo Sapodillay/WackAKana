@@ -315,6 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded08d82168405145be45dfb5464f6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signRenderer: {fileID: 4294704329864815363}
+  progressMaterial: {fileID: 2100000, guid: acc44838a6ab0ea4ea8d771387e840b8, type: 2}
+  decay: 2
   textMesh: {fileID: 1662061334344126308}
 --- !u!1 &4467396007343548452
 GameObject:
